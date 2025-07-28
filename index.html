@@ -12,18 +12,186 @@ INSTRUCTIONS TO HOST THIS FILE:
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Secret to Curing Osgood-Schlatter's - Athlete Workbook</title>
     <script>
-        alert('SCRIPT IN HEAD - WORKING!');
-        console.log('HEAD SCRIPT LOADED');
+        console.log('🚀 Osgood Schlatters v2.6 - Full System Loading...');
         
-        function testFunction() {
-            alert('HEAD Button 1 works!');
+        // Google Apps Script Web App URL  
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwmbii74CsFr7-ELGb7jZLHufhHe9AXtX__9aRiNjPM0CGLjyhlhQFBiQl5OqjswpgV/exec';
+        
+        let currentAthleteName = '';
+        let athleteData = [];
+
+        // Wait for page to load before accessing DOM elements
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📄 DOM loaded, ready for user interaction');
+        });
+
+        // Load athlete progress from Google Sheets
+        function loadAthleteProgress() {
+            console.log('🔍 loadAthleteProgress called');
+            const athleteName = document.getElementById('athleteName').value.trim();
+            
+            if (!athleteName) {
+                showError('Please enter your name first');
+                return;
+            }
+
+            showLoading(true);
+            hideError();
+
+            fetch(`${GOOGLE_SCRIPT_URL}?action=load&name=${encodeURIComponent(athleteName)}`)
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        currentAthleteName = athleteName;
+                        athleteData = result.data;
+                        
+                        if (athleteData.length > 0) {
+                            console.log('✅ Existing athlete data found:', athleteData.length, 'records');
+                            loadExistingAthleteData();
+                            showWelcomeBack();
+                        } else {
+                            console.log('🆕 New athlete detected');
+                            showNewAthleteMessage();
+                        }
+                    } else {
+                        showError('Error loading data: ' + (result.error || 'Unknown error'));
+                    }
+                })
+                .catch(error => {
+                    showError('Connection error. Please check your internet connection and try again.');
+                    console.error('Load error:', error);
+                })
+                .finally(() => {
+                    showLoading(false);
+                });
         }
-        
-        function testFunction2() {
-            alert('HEAD Button 2 works!');
+
+        // Start new program
+        function startNewProgram() {
+            console.log('🆕 startNewProgram called');
+            const athleteName = document.getElementById('athleteName').value.trim();
+            
+            if (!athleteName) {
+                showError('Please enter your name first');
+                return;
+            }
+
+            if (confirm(`This will start a completely new program for ${athleteName}. Any existing progress will be cleared. Are you sure?`)) {
+                currentAthleteName = athleteName;
+                athleteData = [];
+                clearAllForms();
+                showNewAthleteMessage();
+                console.log('✅ New program started for:', athleteName);
+            }
         }
-        
-        console.log('HEAD FUNCTIONS DEFINED');
+
+        // Save week progress
+        function saveWeekProgress(weekNumber) {
+            console.log('💾 saveWeekProgress called for week:', weekNumber);
+            if (!currentAthleteName) {
+                showError('Please load your profile first');
+                return;
+            }
+            
+            alert(`Week ${weekNumber} progress will be saved to Google Sheets! (Full functionality coming)`);
+        }
+
+        // Load existing athlete data into forms
+        function loadExistingAthleteData() {
+            console.log('📋 Loading existing athlete data');
+            if (athleteData.length > 0) {
+                const firstRecord = athleteData[0];
+                document.getElementById('age').value = firstRecord.athlete_age || '';
+                document.getElementById('startDate').value = firstRecord.athlete_start_date || '';
+            }
+        }
+
+        // Show welcome back message
+        function showWelcomeBack() {
+            const display = document.getElementById('currentAthleteDisplay');
+            const info = document.getElementById('currentAthleteInfo');
+            const summary = document.getElementById('progressSummary');
+            
+            info.textContent = `${currentAthleteName} - Welcome back!`;
+            
+            let summaryHTML = '<h5 style="margin-bottom: 10px;">📊 Your Progress:</h5>';
+            summaryHTML += `<p>Found ${athleteData.length} previous entries</p>`;
+            
+            summary.innerHTML = summaryHTML;
+            display.style.display = 'block';
+        }
+
+        // Show new athlete message
+        function showNewAthleteMessage() {
+            const display = document.getElementById('currentAthleteDisplay');
+            const info = document.getElementById('currentAthleteInfo');
+            const summary = document.getElementById('progressSummary');
+            
+            info.textContent = `Welcome ${currentAthleteName}! Starting your Osgood-Schlatter's recovery program.`;
+            summary.innerHTML = `
+                <h5 style="margin-bottom: 10px;">🚀 Getting Started:</h5>
+                <p>You're beginning a 7-week program. Your progress will be automatically saved as you go.</p>
+                <p style="margin-top: 10px;"><strong>Next steps:</strong></p>
+                <ol style="margin-left: 20px;">
+                    <li>Fill in your age and start date above</li>
+                    <li>Click on "Week 1" below to begin</li>
+                    <li>Complete your daily routine and log your pain levels</li>
+                </ol>
+            `;
+            display.style.display = 'block';
+        }
+
+        // Clear all forms
+        function clearAllForms() {
+            document.getElementById('age').value = '';
+            document.getElementById('startDate').value = '';
+        }
+
+        // Show/hide loading indicator
+        function showLoading(show) {
+            const indicator = document.getElementById('loadingIndicator');
+            if (indicator) {
+                indicator.style.display = show ? 'block' : 'none';
+            }
+        }
+
+        // Show error message
+        function showError(message) {
+            const errorMsg = document.getElementById('errorMessage');
+            const errorDisplay = document.getElementById('errorDisplay');
+            if (errorMsg) errorMsg.textContent = message;
+            if (errorDisplay) errorDisplay.style.display = 'block';
+        }
+
+        // Hide error message
+        function hideError() {
+            const errorDisplay = document.getElementById('errorDisplay');
+            if (errorDisplay) errorDisplay.style.display = 'none';
+        }
+
+        // Show specific week
+        function showWeek(weekNumber) {
+            console.log('📅 Showing week:', weekNumber);
+            const weekSections = document.querySelectorAll('.week-section');
+            weekSections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            const weekButtons = document.querySelectorAll('.week-btn');
+            weekButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            const targetWeek = document.getElementById(`week${weekNumber}`);
+            if (targetWeek) {
+                targetWeek.classList.add('active');
+            }
+            
+            // Find the clicked button and make it active
+            weekButtons[weekNumber - 1]?.classList.add('active');
+        }
+
+        console.log('✅ All functions defined successfully!');
     </script>
     <style>
         * {
@@ -387,7 +555,7 @@ INSTRUCTIONS TO HOST THIS FILE:
     </style>
 </head>
 <body>
-    <div class="version-badge">v2.5 - Head Script Test</div>
+    <div class="version-badge">v2.6 - Working System</div>
     
     <div class="container">
         <div class="header">
@@ -420,8 +588,8 @@ INSTRUCTIONS TO HOST THIS FILE:
                 </div>
                 
                 <div style="text-align: center;">
-                    <button class="save-btn" onclick="testFunction()">📥 Load My Progress</button>
-                    <button class="save-btn" onclick="testFunction2()" style="background: linear-gradient(135deg, #16a34a, #22c55e);">🆕 Start New Program</button>
+                    <button class="save-btn" onclick="loadAthleteProgress()" id="loadBtn">📥 Load My Progress</button>
+                    <button class="save-btn" onclick="startNewProgram()" style="background: linear-gradient(135deg, #16a34a, #22c55e);">🆕 Start New Program</button>
                 </div>
             </div>
             
