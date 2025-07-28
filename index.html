@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<!-- 
+INSTRUCTIONS TO HOST THIS FILE:
+1. Save this entire file as "index.html" (not .txt)
+2. Go to netlify.com
+3. Drag and drop the index.html file onto their drop zone
+4. Your site will be live instantly!
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Secret to Curing Osgood-Schlatter's - Athlete Workbook</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: #333;
+            margin: 0 auto 20px;
+            position: relative;
+            transform: rotate(45deg);
+            border-radius: 8px;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            width: 30px;
+            height: 30px;
+            background: white;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+
+        .brand-text {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        h2 {
+            color: #666;
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+
+        .athlete-info {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input[type="text"], input[type="date"], input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus, input[type="date"]:focus, input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .info-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .week-nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .week-btn {
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .week-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .week-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .week-section {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .week-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .week-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #333;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .pain-log, .daily-routine, .workouts {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 10px;
+        }
+
+        .day-grid {
+            display: grid;
+            grid-template-columns: 200px repeat(7, 1fr);
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .day-header {
+            display: grid;
+            grid-template-columns: 200px repeat(7, 1fr);
+            gap: 10px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .day-number {
+            text-align: center;
+            font-weight: 600;
+            background: #f8f9fa;
+            padding: 8px;
+            border-radius: 5px;
+        }
+
+        .exercise-name {
+            font-weight: 600;
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 5px;
+        }
+
+        .pain-input, .checkbox-input {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .checkbox-input {
+            width: 20px;
+            height: 20px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .workout-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .workout-table th, .workout-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .workout-table th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-weight: 600;
+        }
+
+        .workout-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .workout-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            background: #333;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .no-workouts {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #666;
+            font-style: italic;
+            padding: 60px 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 2px dashed #ccc;
+        }
+
+        .save-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+
+        .save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .instructions {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196f3;
+        }
+
+        .support-section {
+            background: #f1f8e9;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border-left: 4px solid #4caf50;
+        }
+
+        @media (max-width: 768px) {
+            .day-grid, .day-header {
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }
+            
+            .week-nav {
+                justify-content: flex-start;
+            }
+            
+            .week-btn {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo"></div>
+            <div class="brand-text">CORE ADVANTAGE</div>
+            <h1>THE SECRET TO CURING OSGOOD SCHLATTERS</h1>
+            <h2>ATHLETE WORKBOOK</h2>
+        </div>
+
+        <div class="athlete-info">
+            <h3 style="margin-bottom: 20px; font-size: 1.5rem;">Athlete Information</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <div class="form-group">
+                    <label for="athleteName">Athlete's Name:</label>
+                    <input type="text" id="athleteName" placeholder="Enter athlete's name">
+                </div>
+                <div class="form-group">
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" placeholder="Enter age">
+                </div>
+                <div class="form-group">
+                    <label for="startDate">Date Program Started:</label>
+                    <input type="date" id="startDate">
+                </div>
+            </div>
+            <button class="save-btn" onclick="saveAthleteInfo()">Save Athlete Info</button>
+        </div>
+
+        <div class="info-section">
+            <h3 style="margin-bottom: 20px; font-size: 1.5rem;">Using Your Workbook</h3>
+            <div class="instructions">
+                <p><strong>Print this workbook and fill it in as you complete each week of the program. Keep it somewhere safe when not in use.</strong></p>
+            </div>
+            
+            <p>This Workbook is designed to help guide you through the entire seven week program. We recommend printing this workbook and filling it in every day to help you keep track of your progress. Each week will build on the one before, progressing you along at what is a typical pace for most Osgood cases. You will have access to support, instructional videos and guidance via your online portal.</p>
+            
+            <p style="margin-top: 15px;">If you are unsure as to whether you should progress or not, default to repeating the previous week, a slower pace through this program will lead to a more lasting result.</p>
+            
+            <p style="margin-top: 15px;">Most knees respond rapidly to this program, but some can take a little longer, so whether it takes you seven, eight or twelve weeks to complete the entire program, don't despair. Pushing ahead when you are not ready will not speed up the process and will only hamper your long term progress.</p>
+
+            <h4 style="margin: 25px 0 15px 0; font-size: 1.2rem; color: #333;">Training Components</h4>
+            
+            <div style="margin-bottom: 20px;">
+                <h5 style="color: #667eea; margin-bottom: 10px;">Pain Logging (1-2 minutes daily)</h5>
+                <p>Being in pain is not fun, but continually monitoring your pain levels is a great way to better manage your pain in the short term, and better predict and avoid pain and injury in the future.</p>
+                <p style="margin-top: 10px;">All you have to do, is give an honest assessment of your pain before and after your Osgood exercises for the day. The best way to do this is by doing a tiny little squat and scoring your knees from zero to 10.</p>
+                <p style="margin-top: 10px;"><strong>Pain Scale:</strong> 0 = nothing at all, 3 = just a little sensation, 5 = quite uncomfortable, 8 = agony, 10 = you need a wheelchair and can barely walk!</p>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <h5 style="color: #667eea; margin-bottom: 10px;">Daily Maintenance (5-15 minutes daily)</h5>
+                <p>Doing this every day is key to not only eliminating your pain but also helping you become a better all round athlete.</p>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <h5 style="color: #667eea; margin-bottom: 10px;">Workouts (10-30 minutes three times per week)</h5>
+                <p>While the daily maintenance will help reduce your pain levels, the workouts are designed to stop your Osgood ever coming back. You should do this workout three times a week, each session separated by 48-72 hours (ie: Monday, Wednesday, Friday).</p>
+                <p style="margin-top: 10px;">Both the Daily Maintenance and the Workout components will advance to challenge you as your symptoms settle and your strength increases.</p>
+            </div>
+        </div>
+
+        <div class="week-nav">
+            <button class="week-btn active" onclick="showWeek(1)">Week 1</button>
+            <button class="week-btn" onclick="showWeek(2)">Week 2</button>
+            <button class="week-btn" onclick="showWeek(3)">Week 3</button>
+            <button class="week-btn" onclick="showWeek(4)">Week 4</button>
+            <button class="week-btn" onclick="showWeek(5)">Week 5</button>
+            <button class="week-btn" onclick="showWeek(6)">Week 6</button>
+            <button class="week-btn" onclick="showWeek(7)">Week 7</button>
+        </div>
+
+        <!-- Week 1 -->
+        <div class="week-section active" id="week1">
+            <div class="week-title">WEEK 1</div>
+            
+            <div class="pain-log">
+                <div class="section-title">Daily Pain Log</div>
+                <p style="margin-bottom: 15px;">Fill in your pain levels before and after your daily routine each day. On the days you complete a workout, fill in the log before and after your workout instead.</p>
+                
+                <div class="day-header">
+                    <div></div>
+                    <div class="day-number">Day 1</div>
+                    <div class="day-number">Day 2</div>
+                    <div class="day-number">Day 3</div>
+                    <div class="day-number">Day 4</div>
+                    <div class="day-number">Day 5</div>
+                    <div class="day-number">Day 6</div>
+                    <div class="day-number">Day 7</div>
+                </div>
+                
+                <div class="day-grid">
+                    <div class="exercise-name">Before Training</div>
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                </div>
+                
+                <div class="day-grid">
+                    <div class="exercise-name">After Training</div>
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                </div>
+            </div>
+
+            <div class="daily-routine">
+                <div class="section-title">Daily Routine</div>
+                <p style="margin-bottom: 15px;">Complete these exercises every day, in the specified order. You will find the instructions on our website.</p>
+                
+                <div class="day-header">
+                    <div></div>
+                    <div class="day-number">Day 1</div>
+                    <div class="day-number">Day 2</div>
+                    <div class="day-number">Day 3</div>
+                    <div class="day-number">Day 4</div>
+                    <div class="day-number">Day 5</div>
+                    <div class="day-number">Day 6</div>
+                    <div class="day-number">Day 7</div>
+                </div>
+                
+                <div class="day-grid">
+                    <div class="exercise-name">Foam Rolling</div>
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                </div>
+                
+                <div class="day-grid">
+                    <div class="exercise-name">Knee Isometrics</div>
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                </div>
+            </div>
+
+            <div class="workouts">
+                <div class="section-title">Workouts</div>
+                <div class="no-workouts">
+                    No workouts for week one.<br>
+                    Workouts start in week three
+                </div>
+            </div>
+            
+            <button class="save-btn" onclick="saveWeekData(1)">Save Week 1 Progress</button>
+        </div>
+
+        <!-- Week 2 -->
+        <div class="week-section" id="week2">
+            <div class="week-title">WEEK 2</div>
+            
+            <div class="pain-log">
+                <div class="section-title">Daily Pain Log</div>
+                <p style="margin-bottom: 15px;">Fill in your pain levels before and after your daily routine each day. If you are completing a workout that day, fill in the log before and after your workout instead.</p>
+                
+                <div class="day-header">
+                    <div></div>
+                    <div class="day-number">Day 1</div>
+                    <div class="day-number">Day 2</div>
+                    <div class="day-number">Day 3</div>
+                    <div class="day-number">Day 4</div>
+                    <div class="day-number">Day 5</div>
+                    <div class="day-number">Day 6</div>
+                    <div class="day-number">Day 7</div>
+                </div>
+                
+                <div class="day-grid">
+                    <div class="exercise-name">Before Training</div>
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                </div>
+                
+                <div class="day-grid">
+                    <div class="exercise-name">After Training</div>
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                </div>
+            </div>
+
+            <div class="daily-routine">
+                <div class="section-title">Daily Routine</div>
+                <p style="margin-bottom: 15px;">Complete these exercises every day, in the specified order</p>
+                
+                <div class="day-header">
+                    <div></div>
+                    <div class="day-number">Day 1</div>
+                    <div class="day-number">Day 2</div>
+                    <div class="day-number">Day 3</div>
+                    <div class="day-number">Day 4</div>
+                    <div class="day-number">Day 5</div>
+                    <div class="day-number">Day 6</div>
+                    <div class="day-number">Day 7</div>
+                </div>
+                
+                <div class="day-grid">
+                    <div class="exercise-name">Foam Rolling</div>
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                </div>
+                
+                <div class="day-grid">
+                    <div class="exercise-name">Knee Isometrics</div>
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                </div>
+            </div>
+
+            <div class="workouts">
+                <div class="section-title">Workouts</div>
+                <div class="no-workouts">
+                    No workouts for week two.<br>
+                    Workouts start in week three
+                </div>
+            </div>
+            
+            <button class="save-btn" onclick="saveWeekData(2)">Save Week 2 Progress</button>
+        </div>
+
+        <!-- Week 3 -->
+        <div class="week-section" id="week3">
+            <div class="week-title">WEEK 3</div>
+            
+            <div class="pain-log">
+                <div class="section-title">Daily Pain Log</div>
+                <p style="margin-bottom: 15px;">Fill in your pain levels before and after your daily routine each day. If you are completing a workout that day, fill in the log before and after your workout instead.</p>
+                
+                <div class="day-header">
+                    <div></div>
+                    <div class="day-number">Day 1</div>
+                    <div class="day-number">Day 2</div>
+                    <div class="day-number">Day 3</div>
+                    <div class="day-number">Day 4</div>
+                    <div class="day-number">Day 5</div>
+                    <div class="day-number">Day 6</div>
+                    <div class="day-number">Day 7</div>
+                </div>
+                
+                <div class="day-grid">
+                    <div class="exercise-name">Before Training</div>
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                </div>
+                
+                <div class="day-grid">
+                    <div class="exercise-name">After Training</div>
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                </div>
+            </div>
+
+            <div class="daily-routine">
+                <div class="section-title">Daily Routine</div>
+                <p style="margin-bottom: 15px;">Complete these exercises every day, in the specified order</p>
+                
+                <div class="day-header">
+                    <div></div>
+                    <div class="day-number">Day 1</div>
+                    <div class="day-number">Day 2</div>
+                    <div class="day-number">Day 3</div>
+                    <div class="day-number">Day 4</div>
+                    <div class="day-number">Day 5</div>
+                    <div class="day-number">Day 6</div>
+                    <div class="day-number">Day 7</div>
+                </div>
+                
+                <div class="day-grid">
+                    <div class="exercise-name">Foam Rolling</div>
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                </div>
+                
+                <div class="day-grid">
+                    <div class="exercise-name">Basic Stretches</div>
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                </div>
+                
+                <div class="day-grid">
+                    <div class="exercise-name">Glute Activation</div>
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                </div>
+            </div>
+
+            <div class="workouts">
+                <div class="section-title">Workouts</div>
+                <p style="margin-bottom: 20px;">Complete these three workouts in the specified order and for the prescribed sets, reps and times. Be sure to rest 48 hours between each workout to allow adequate recovery</p>
+                
+                <div class="workout-title">Workout 1</div>
+                <table class="workout-table">
+                    <thead>
+                        <tr>
+                            <th>Exercise</th>
+                            <th>Sets x reps x load</th>
+                            <th>Set 1</th>
+                            <th>Set 2</th>
+                            <th>Set 3</th>
+                            <th>Set 4</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Knee Isometrics</td>
+                            <td>4x 30sec (each leg)</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                        </tr>
+                        <tr>
+                            <td>Glute Bridges</td>
+                            <td>3x 10reps</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="workout-title">Workout 2</div>
+                <table class="workout-table">
+                    <thead>
+                        <tr>
+                            <th>Exercise</th>
+                            <th>Sets x reps x load</th>
+                            <th>Set 1</th>
+                            <th>Set 2</th>
+                            <th>Set 3</th>
+                            <th>Set 4</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Knee Isometrics</td>
+                            <td>4x 30sec (each leg)</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                        </tr>
+                        <tr>
+                            <td>Glute Bridges</td>
+                            <td>3x 10reps</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="workout-title">Workout 3</div>
+                <table class="workout-table">
+                    <thead>
+                        <tr>
+                            <th>Exercise</th>
+                            <th>Sets x reps x load</th>
+                            <th>Set 1</th>
+                            <th>Set 2</th>
+                            <th>Set 3</th>
+                            <th>Set 4</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Knee Isometrics</td>
+                            <td>4x 30sec (each leg)</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                        </tr>
+                        <tr>
+                            <td>Glute Bridges</td>
+                            <td>3x 12reps</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <button class="save-btn" onclick="saveWeekData(3)">Save Week 3 Progress</button>
+        </div>
+
+        <!-- Week 4 -->
+        <div class="week-section" id="week4">
+            <div class="week-title">WEEK 4</div>
+            
+            <div class="pain-log">
+                <div class="section-title">Daily Pain Log</div>
+                <p style="margin-bottom: 15px;">Fill in your pain levels before and after your daily routine each day. If you are completing a workout that day, fill in the log before and after your workout instead.</p>
+                
+                <div class="day-header">
+                    <div></div>
+                    <div class="day-number">Day 1</div>
+                    <div class="day-number">Day 2</div>
+                    <div class="day-number">Day 3</div>
+                    <div class="day-number">Day 4</div>
+                    <div class="day-number">Day 5</div>
+                    <div class="day-number">Day 6</div>
+                    <div class="day-number">Day 7</div>
+                </div>
+                
+                <div class="day-grid">
+                    <div class="exercise-name">Before Training</div>
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                </div>
+                
+                <div class="day-grid">
+                    <div class="exercise-name">After Training</div>
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                </div>
+            </div>
+
+            <div class="daily-routine">
+                <div class="section-title">Daily Routine</div>
+                <p style="margin-bottom: 15px;">Complete these exercises every day, in the specified order</p>
+                
+                <div class="day-header">
+                    <div></div>
+                    <div class="day-number">Day 1</div>
+                    <div class="day-number">Day 2</div>
+                    <div class="day-number">Day 3</div>
+                    <div class="day-number">Day 4</div>
+                    <div class="day-number">Day 5</div>
+                    <div class="day-number">Day 6</div>
+                    <div class="day-number">Day 7</div>
+                </div>
+                
+                <div class="day-grid">
+                    <div class="exercise-name">Foam Rolling</div>
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                </div>
+                
+                <div class="day-grid">
+                    <div class="exercise-name">Basic Stretches</div>
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                </div>
+                
+                <div class="day-grid">
+                    <div class="exercise-name">Glute Activation</div>
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                </div>
+            </div>
+
+            <div class="workouts">
+                <div class="section-title">Workouts</div>
+                <p style="margin-bottom: 20px;">Complete these three workouts in the specified order and for the prescribed sets, reps and times. Be sure to rest 48 hours between each workout to allow adequate recovery</p>
+                
+                <div class="workout-title">Workout 1</div>
+                <table class="workout-table">
+                    <thead>
+                        <tr>
+                            <th>Exercise</th>
+                            <th>Sets x reps x load</th>
+                            <th>Set 1</th>
+                            <th>Set 2</th>
+                            <th>Set 3</th>
+                            <th>Set 4</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Knee Isometrics</td>
+                            <td>4x 30sec (each leg)</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                        </tr>
+                        <tr>
+                            <td>Glute Bridges</td>
+                            <td>3x 12reps</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Shallow Squats</td>
+                            <td>3x 8reps</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Calf Raises</td>
+                            <td>3x 10reps (double leg)</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="workout-title">Workout 2</div>
+                <table class="workout-table">
+                    <thead>
+                        <tr>
+                            <th>Exercise</th>
+                            <th>Sets x reps x load</th>
+                            <th>Set 1</th>
+                            <th>Set 2</th>
+                            <th>Set 3</th>
+                            <th>Set 4</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Knee Isometrics</td>
+                            <td>4x 30sec (each leg)</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                        </tr>
+                        <tr>
+                            <td>Glute Bridges</td>
+                            <td>3x 15reps</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Shallow Squats</td>
+                            <td>3x 8reps</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Calf Raises</td>
+                            <td>3x 12reps (double leg)</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="workout-title">Workout 3</div>
+                <table class="workout-table">
+                    <thead>
+                        <tr>
+                            <th>Exercise</th>
+                            <th>Sets x reps x load</th>
+                            <th>Set 1</th>
+                            <th>Set 2</th>
+                            <th>Set 3</th>
+                            <th>Set 4</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Knee Isometrics</td>
+                            <td>4x 30sec (each leg)</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                        </tr>
+                        <tr>
+                            <td>Glute Bridges</td>
+                            <td>3x 15reps</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Shallow Squats</td>
+                            <td>3x 8reps</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Calf Raises</td>
+                            <td>3x 15reps (double leg)</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <button class="save-btn" onclick="saveWeekData(4)">Save Week 4 Progress</button>
+        </div>
+
+        <!-- Week 5 -->
+        <div class="week-section" id="week5">
+            <div class="week-title">WEEK 5</div>
+            
+            <div class="pain-log">
+                <div class="section-title">Daily Pain Log</div>
+                <p style="margin-bottom: 15px;">Fill in your pain levels before and after your daily routine each day. If you are completing a workout that day, fill in the log before and after your workout instead.</p>
+                
+                <div class="day-header">
+                    <div></div>
+                    <div class="day-number">Day 1</div>
+                    <div class="day-number">Day 2</div>
+                    <div class="day-number">Day 3</div>
+                    <div class="day-number">Day 4</div>
+                    <div class="day-number">Day 5</div>
+                    <div class="day-number">Day 6</div>
+                    <div class="day-number">Day 7</div>
+                </div>
+                
+                <div class="day-grid">
+                    <div class="exercise-name">Before Training</div>
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                </div>
+                
+                <div class="day-grid">
+                    <div class="exercise-name">After Training</div>
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                </div>
+            </div>
+
+            <div class="daily-routine">
+                <div class="section-title">Daily Routine</div>
+                <p style="margin-bottom: 15px;">Complete these exercises every day, in the specified order</p>
+                
+                <div class="day-header">
+                    <div></div>
+                    <div class="day-number">Day 1</div>
+                    <div class="day-number">Day 2</div>
+                    <div class="day-number">Day 3</div>
+                    <div class="day-number">Day 4</div>
+                    <div class="day-number">Day 5</div>
+                    <div class="day-number">Day 6</div>
+                    <div class="day-number">Day 7</div>
+                </div>
+                
+                <div class="day-grid">
+                    <div class="exercise-name">Foam Rolling</div>
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                </div>
+                
+                <div class="day-grid">
+                    <div class="exercise-name">Basic Stretches</div>
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                </div>
+                
+                <div class="day-grid">
+                    <div class="exercise-name">Glute Activation</div>
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                </div>
+            </div>
+
+            <div class="workouts">
+                <div class="section-title">Workouts</div>
+                <p style="margin-bottom: 20px;">Complete these three workouts in the specified order and for the prescribed sets, reps and times. Be sure to rest 48 hours between each workout to allow adequate recovery</p>
+                
+                <div class="workout-title">Workout 1</div>
+                <table class="workout-table">
+                    <thead>
+                        <tr>
+                            <th>Exercise</th>
+                            <th>Sets x reps x load</th>
+                            <th>Set 1</th>
+                            <th>Set 2</th>
+                            <th>Set 3</th>
+                            <th>Set 4</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Knee Isometrics</td>
+                            <td>4x 30sec (each leg)</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                        </tr>
+                        <tr>
+                            <td>Glute Bridges</td>
+                            <td>3x 15reps</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Shallow Squats</td>
+                            <td>3x 8reps</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Calf Raises</td>
+                            <td>3x 15reps (double leg)</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="workout-title">Workout 2</div>
+                <table class="workout-table">
+                    <thead>
+                        <tr>
+                            <th>Exercise</th>
+                            <th>Sets x reps x load</th>
+                            <th>Set 1</th>
+                            <th>Set 2</th>
+                            <th>Set 3</th>
+                            <th>Set 4</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Knee Isometrics</td>
+                            <td>4x 30sec (each leg)</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                        </tr>
+                        <tr>
+                            <td>Glute Bridges</td>
+                            <td>3x 15reps</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Shallow Squats</td>
+                            <td>3x 12reps</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Calf Raises</td>
+                            <td>3x 18reps (double leg)</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="workout-title">Workout 3</div>
+                <table class="workout-table">
+                    <thead>
+                        <tr>
+                            <th>Exercise</th>
+                            <th>Sets x reps x load</th>
+                            <th>Set 1</th>
+                            <th>Set 2</th>
+                            <th>Set 3</th>
+                            <th>Set 4</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Knee Isometrics</td>
+                            <td>4x 30sec (each leg)</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                        </tr>
+                        <tr>
+                            <td>Glute Bridges</td>
+                            <td>3x 15reps</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Shallow Squats</td>
+                            <td>3x 12reps</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Calf Raises</td>
+                            <td>3x 20reps (double leg)</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <button class="save-btn" onclick="saveWeekData(5)">Save Week 5 Progress</button>
+        </div>
+
+        <!-- Week 6 -->
+        <div class="week-section" id="week6">
+            <div class="week-title">WEEK 6</div>
+            
+            <div class="pain-log">
+                <div class="section-title">Daily Pain Log</div>
+                <p style="margin-bottom: 15px;">Fill in your pain levels before and after your daily routine each day. If you are completing a workout that day, fill in the log before and after your workout instead.</p>
+                
+                <div class="day-header">
+                    <div></div>
+                    <div class="day-number">Day 1</div>
+                    <div class="day-number">Day 2</div>
+                    <div class="day-number">Day 3</div>
+                    <div class="day-number">Day 4</div>
+                    <div class="day-number">Day 5</div>
+                    <div class="day-number">Day 6</div>
+                    <div class="day-number">Day 7</div>
+                </div>
+                
+                <div class="day-grid">
+                    <div class="exercise-name">Before Training</div>
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                </div>
+                
+                <div class="day-grid">
+                    <div class="exercise-name">After Training</div>
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                    <input type="number" class="pain-input" min="0" max="10" placeholder="/10">
+                </div>
+            </div>
+
+            <div class="daily-routine">
+                <div class="section-title">Daily Routine</div>
+                <p style="margin-bottom: 15px;">Complete these exercises every day, in the specified order</p>
+                
+                <div class="day-header">
+                    <div></div>
+                    <div class="day-number">Day 1</div>
+                    <div class="day-number">Day 2</div>
+                    <div class="day-number">Day 3</div>
+                    <div class="day-number">Day 4</div>
+                    <div class="day-number">Day 5</div>
+                    <div class="day-number">Day 6</div>
+                    <div class="day-number">Day 7</div>
+                </div>
+                
+                <div class="day-grid">
+                    <div class="exercise-name">Foam Rolling</div>
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox" class="checkbox-input">
+                    <input type="checkbox"
