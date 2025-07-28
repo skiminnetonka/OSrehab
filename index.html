@@ -30,6 +30,22 @@ INSTRUCTIONS TO HOST THIS FILE:
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            position: relative;
+        }
+
+        .version-badge {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(30, 58, 138, 0.9);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .header {
@@ -357,6 +373,8 @@ INSTRUCTIONS TO HOST THIS FILE:
     </style>
 </head>
 <body>
+    <div class="version-badge">v2.1 - Google Sheets</div>
+    
     <div class="container">
         <div class="header">
             <div class="logo"></div>
