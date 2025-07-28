@@ -366,50 +366,49 @@ INSTRUCTIONS TO HOST THIS FILE:
         </div>
 
         <div class="athlete-info">
-            <h3 style="margin-bottom: 20px; font-size: 1.5rem;">Athlete Profile</h3>
+            <h3 style="margin-bottom: 20px; font-size: 1.5rem;">Athlete Profile & Progress</h3>
             
-            <!-- Profile Selection Section -->
-            <div id="profileSelection" style="margin-bottom: 30px;">
-                <div class="form-group">
-                    <label for="existingProfiles">Select Existing Profile:</label>
-                    <select id="existingProfiles" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 16px; margin-bottom: 10px;">
-                        <option value="">-- Select an existing athlete or create new --</option>
-                    </select>
-                    <button class="save-btn" onclick="loadSelectedProfile()" style="margin: 5px;">Load Profile</button>
-                    <button class="save-btn" onclick="deleteSelectedProfile()" style="background: linear-gradient(135deg, #dc2626, #ef4444); margin: 5px;">Delete Profile</button>
-                </div>
+            <!-- Athlete Selection/Entry -->
+            <div style="margin-bottom: 30px; padding: 20px; background: #f0f9ff; border-radius: 10px; border-left: 4px solid #1e3a8a;">
+                <h4 style="margin-bottom: 15px; color: #1e3a8a;">👤 Enter Your Information</h4>
                 
-                <div style="text-align: center; margin: 20px 0; color: #666; font-weight: 600;">
-                    -- OR CREATE NEW PROFILE --
-                </div>
-            </div>
-            
-            <!-- New/Edit Profile Section -->
-            <div id="profileForm">
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 20px;">
                     <div class="form-group">
                         <label for="athleteName">Athlete's Name:</label>
-                        <input type="text" id="athleteName" placeholder="Enter athlete's name">
+                        <input type="text" id="athleteName" placeholder="Enter your name" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 16px;">
                     </div>
                     <div class="form-group">
                         <label for="age">Age:</label>
-                        <input type="number" id="age" placeholder="Enter age">
+                        <input type="number" id="age" placeholder="Age" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 16px;">
                     </div>
                     <div class="form-group">
                         <label for="startDate">Date Program Started:</label>
-                        <input type="date" id="startDate">
+                        <input type="date" id="startDate" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 16px;">
                     </div>
                 </div>
-                <div style="text-align: center; margin-top: 20px;">
-                    <button class="save-btn" onclick="saveAthleteProfile()">Save Profile & Progress</button>
-                    <button class="save-btn" onclick="clearForm()" style="background: linear-gradient(135deg, #6b7280, #9ca3af);">Clear Form</button>
+                
+                <div style="text-align: center;">
+                    <button class="save-btn" onclick="loadAthleteProgress()" id="loadBtn">📥 Load My Progress</button>
+                    <button class="save-btn" onclick="startNewProgram()" style="background: linear-gradient(135deg, #16a34a, #22c55e);">🆕 Start New Program</button>
                 </div>
             </div>
             
-            <!-- Current Profile Display -->
-            <div id="currentProfile" style="display: none; margin-top: 20px; padding: 15px; background: #e0e7ff; border-radius: 10px; border-left: 4px solid #1e3a8a;">
-                <h4 style="margin-bottom: 10px; color: #1e3a8a;">Current Athlete:</h4>
-                <p id="currentProfileInfo" style="margin: 0; font-weight: 600;"></p>
+            <!-- Loading Indicator -->
+            <div id="loadingIndicator" style="display: none; text-align: center; margin: 20px 0; padding: 20px; background: #fef3c7; border-radius: 10px;">
+                <p style="margin: 0; color: #92400e;">⏳ Loading your progress...</p>
+            </div>
+            
+            <!-- Current Athlete Display -->
+            <div id="currentAthleteDisplay" style="display: none; margin-bottom: 20px; padding: 20px; background: #dcfce7; border-radius: 10px; border-left: 4px solid #16a34a;">
+                <h4 style="margin-bottom: 15px; color: #16a34a;">🎯 Welcome Back!</h4>
+                <p id="currentAthleteInfo" style="margin: 0 0 15px 0; font-weight: 600;"></p>
+                <div id="progressSummary" style="background: white; padding: 15px; border-radius: 8px; border: 2px solid #16a34a;"></div>
+            </div>
+            
+            <!-- Error Display -->
+            <div id="errorDisplay" style="display: none; margin-bottom: 20px; padding: 15px; background: #fee2e2; border-radius: 10px; border-left: 4px solid #dc2626;">
+                <h4 style="margin-bottom: 10px; color: #dc2626;">⚠️ Error</h4>
+                <p id="errorMessage" style="margin: 0; color: #991b1b;"></p>
             </div>
         </div>
 
