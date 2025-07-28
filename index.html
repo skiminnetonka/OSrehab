@@ -366,22 +366,51 @@ INSTRUCTIONS TO HOST THIS FILE:
         </div>
 
         <div class="athlete-info">
-            <h3 style="margin-bottom: 20px; font-size: 1.5rem;">Athlete Information</h3>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+            <h3 style="margin-bottom: 20px; font-size: 1.5rem;">Athlete Profile</h3>
+            
+            <!-- Profile Selection Section -->
+            <div id="profileSelection" style="margin-bottom: 30px;">
                 <div class="form-group">
-                    <label for="athleteName">Athlete's Name:</label>
-                    <input type="text" id="athleteName" placeholder="Enter athlete's name">
+                    <label for="existingProfiles">Select Existing Profile:</label>
+                    <select id="existingProfiles" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 16px; margin-bottom: 10px;">
+                        <option value="">-- Select an existing athlete or create new --</option>
+                    </select>
+                    <button class="save-btn" onclick="loadSelectedProfile()" style="margin: 5px;">Load Profile</button>
+                    <button class="save-btn" onclick="deleteSelectedProfile()" style="background: linear-gradient(135deg, #dc2626, #ef4444); margin: 5px;">Delete Profile</button>
                 </div>
-                <div class="form-group">
-                    <label for="age">Age:</label>
-                    <input type="number" id="age" placeholder="Enter age">
-                </div>
-                <div class="form-group">
-                    <label for="startDate">Date Program Started:</label>
-                    <input type="date" id="startDate">
+                
+                <div style="text-align: center; margin: 20px 0; color: #666; font-weight: 600;">
+                    -- OR CREATE NEW PROFILE --
                 </div>
             </div>
-            <button class="save-btn" onclick="saveAthleteInfo()">Save Athlete Info</button>
+            
+            <!-- New/Edit Profile Section -->
+            <div id="profileForm">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div class="form-group">
+                        <label for="athleteName">Athlete's Name:</label>
+                        <input type="text" id="athleteName" placeholder="Enter athlete's name">
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age:</label>
+                        <input type="number" id="age" placeholder="Enter age">
+                    </div>
+                    <div class="form-group">
+                        <label for="startDate">Date Program Started:</label>
+                        <input type="date" id="startDate">
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="save-btn" onclick="saveAthleteProfile()">Save Profile & Progress</button>
+                    <button class="save-btn" onclick="clearForm()" style="background: linear-gradient(135deg, #6b7280, #9ca3af);">Clear Form</button>
+                </div>
+            </div>
+            
+            <!-- Current Profile Display -->
+            <div id="currentProfile" style="display: none; margin-top: 20px; padding: 15px; background: #e0e7ff; border-radius: 10px; border-left: 4px solid #1e3a8a;">
+                <h4 style="margin-bottom: 10px; color: #1e3a8a;">Current Athlete:</h4>
+                <p id="currentProfileInfo" style="margin: 0; font-weight: 600;"></p>
+            </div>
         </div>
 
         <div class="info-section">
